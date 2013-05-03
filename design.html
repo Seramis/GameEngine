@@ -1,0 +1,92 @@
+<html>
+<head>
+<style type="text/css">
+
+html, body
+{
+	background: #444;
+	color: white;
+	margin: 0px;
+	padding: 0px;
+	background: url("file://C:/Users/GigAHerZ/Pictures/Wallpapers/Windows Photo Gallery Wallpaper.jpg") no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.window {
+	border: 1px solid yellow;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	padding: 10px;
+	/* Safari 4-5, Chrome 1-9 */
+	background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.75)), color-stop(0.5, rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.75)));
+
+	/* Safari 5.1+, Chrome 10+ */
+	background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75));
+
+	/* Firefox 3.6+ */
+	background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75));
+
+	/* IE 10 */
+	background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75));
+
+	/* Opera 11.10+ */
+	background: -o-linear-gradient(top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75));
+}
+
+.window .heading
+{
+	margin: -10px;
+	margin-bottom: 10px;
+	background: rgba(0, 0, 0, 0.5);
+	color: #a52a2a;
+	font-weight: bold;
+	border-bottom: 1px solid yellow;
+	text-align: center;
+	display: block;
+}
+
+.window button, .window input
+{
+	background: black;
+	border: 1px solid yellow;
+	color: yellow;
+	font-weight: bold;
+}
+
+.window button:active, .window input:active {
+	border: 1px solid red;
+}
+
+.window span.bottom{
+	display: block;
+	margin: -10px;
+	margin-bottom: 0px;
+	width: 100%;
+	position: absolute;
+	bottom: 10px;
+	text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+<div class="window" style="width: 600px; height: 400px;">
+	<span class="heading">Settings</span>
+	<label>Username: AAA</label><br/>
+	<label>Password: <input type="text"></label><br/>
+	<label>Password again: <input type="text"></label><br/>
+	<label>E-mail: <input type="text"></label><br/>
+	<label>Newsletter: <input type="checkbox"></label>
+	<span class="bottom">
+		<button>OK</button>
+		<button>Cancel</button>
+	</span>
+</div>
+</body>
+</html>

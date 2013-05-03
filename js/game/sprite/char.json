@@ -1,0 +1,8 @@
+{
+	"image": "img/chr.png",
+	"size": [32, 32],
+	"animationSpeed": 6,
+	"animation": {
+		"default": [0, 1, 2, 3, 4, 5, 6, 7]
+	}
+}
