@@ -14,22 +14,22 @@ var obj_Char = Jnt.Entity.extend({
 	{
 		var stepSpeed = this.speed * modifier;
 
-		if(Jnt.Keyboard.isKeyDown(Jnt.Keyboard.keys.ArrowDown))
+		if(Jnt.Input.isKeyDown(Jnt.Input.keys.ArrowDown))
 		{
 			this.y += stepSpeed;
 		}
 
-		if(Jnt.Keyboard.isKeyDown(Jnt.Keyboard.keys.ArrowUp))
+		if(Jnt.Input.isKeyDown(Jnt.Input.keys.ArrowUp))
 		{
 			this.y -= stepSpeed;
 		}
 
-		if(Jnt.Keyboard.isKeyDown(Jnt.Keyboard.keys.ArrowRight))
+		if(Jnt.Input.isKeyDown(Jnt.Input.keys.ArrowRight))
 		{
 			this.x += stepSpeed;
 		}
 
-		if(Jnt.Keyboard.isKeyDown(Jnt.Keyboard.keys.ArrowLeft))
+		if(Jnt.Input.isKeyDown(Jnt.Input.keys.ArrowLeft))
 		{
 			this.x -= stepSpeed;
 		}
