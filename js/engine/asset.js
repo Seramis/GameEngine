@@ -1,3 +1,7 @@
+/**
+ * Asset manager
+ */
+
 Jnt.Asset = {
 	_cache: {}
 };
@@ -8,8 +12,12 @@ Jnt.Asset.get = function(sAssetUrl, fCallback)
 	{
 		return this._load(sAssetUrl, fCallback);
 	}
+	else if(!this._cache[sAssetUrl].bLoaded)
+	{
+		return this._addCallback(sAssetUrl, fCallback);
+	}
 
-	fCallback(this._cache[sAssetUrl]);
+	fCallback(this._cache[sAssetUrl].asset);
 
 	return true;
 };
@@ -60,55 +68,83 @@ Jnt.Asset._getType = function(sAssetUrl)
 	return undefined;
 };
 
+Jnt.Asset._addCallback = function(sAssetUrl, fCallback)
+{
+	if(!this._cache[sAssetUrl])
+	{
+		return false;
+	}
+
+	if(!fCallback)
+	{
+		return false;
+	}
+
+	this._cache[sAssetUrl].aCallbackList.push(fCallback);
+
+	return true;
+};
+
 Jnt.Asset._load = function(sAssetUrl, fCallback)
 {
-	var asset;
+	var assetData = {
+		asset: undefined,
+		aCallbackList: [],
+		bLoaded: false
+	};
+
 	switch(this._getType(sAssetUrl))
 	{
 		case 'image':
-			asset = new Image();
-			asset.onload = function()
+			assetData.asset = new Image();
+			assetData.asset.onload = function()
 			{
-				if(fCallback)
-				{
-					fCallback(asset);
-				}
+				Jnt.Asset._runCallback(sAssetUrl);
 			};
-			asset.src = sAssetUrl;
+			assetData.asset.src = sAssetUrl;
 			break;
 		case 'javascript':
-			asset = document.createElement('script');
-			asset.setAttribute('type', 'text/javascript');
-			asset.onload = function()
+			assetData.asset = document.createElement('script');
+			assetData.asset.setAttribute('type', 'text/javascript');
+			assetDataasset.onload = function()
 			{
-				if(fCallback)
-				{
-					fCallback(asset);
-				}
+				Jnt.Asset._runCallback(sAssetUrl);
 			};
-			asset.setAttribute('src', sAssetUrl);
-			document.getElementsByTagName('head')[0].appendChild(asset);
+			assetData.asset.setAttribute('src', sAssetUrl);
+			document.getElementsByTagName('head')[0].appendChild(assetData.asset);
 			break;
 		case 'json':
-			asset = {};
+			assetData.asset = {};
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', sAssetUrl, true);
 			xhr.overrideMimeType("application/json");
 			xhr.onload = function()
 			{
-				asset = eval('(' + this.responseText + ')');
-				if(fCallback)
-				{
-					fCallback(asset);
-				}
+				assetData.asset = eval('(' + this.responseText + ')');
+				Jnt.Asset._runCallback(sAssetUrl);
 			};
 			xhr.send();
 			break;
 		default:
-			return false;
+			return undefined;
 	}
 
-	this._cache[sAssetUrl] = asset;
+	//We have not returned, so type at least is okay
+	this._cache[sAssetUrl] = assetData;
+
+	Jnt.Asset._addCallback(sAssetUrl, fCallback);
 
 	return true;
+};
+
+Jnt.Asset._runCallback = function(sAssetUrl)
+{
+	var assetData = this._cache[sAssetUrl];
+
+	assetData.bLoaded = true;
+
+	for(var i = 0, l = assetData.aCallbackList.length; i<l; i++)
+	{
+		assetData.aCallbackList[i](assetData.asset);
+	}
 };

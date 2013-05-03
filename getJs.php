@@ -11,6 +11,7 @@ $aScriptPaths = array(
 	'js/game/scene/*.js',
 	'js/game/game.js',
 );
+
 header('Content-type: text/javascript');
 
 echo makeBigFile($aScriptPaths, 'Jnt Game Engine');
