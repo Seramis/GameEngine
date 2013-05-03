@@ -10,7 +10,7 @@ Game = Jnt.Game.extend({
 	{
 		var ctx = Jnt.Canvas.getContext('canvas');
 
-		var canvas = Jnt.Canvas.get('canvas');
+		var canvas = Jnt.Canvas.getCanvas('canvas');
 
 		ctx.clearRect(0, 0, canvas.getAttribute('width'), canvas.getAttribute('height'));
 	}
