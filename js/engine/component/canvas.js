@@ -1,31 +1,42 @@
-Jnt.Canvas = {
-	_aCanvas: {}
-};
-
-Jnt.Canvas.getContext = function(sCanvasId)
+Jnt.Canvas = new function()
 {
-	return this._get(sCanvasId).context;
-};
+	//Canvas cache
+	var _aCanvas = {};
 
-Jnt.Canvas.getCanvas = function(sCanvasId)
-{
-	return this._get(sCanvasId).canvas;
-};
-
-Jnt.Canvas._get = function(sCanvasId)
-{
-	if(!this._aCanvas[sCanvasId])
+	//Canvas data loader/getter
+	var _get = function(sCanvasId)
 	{
-		var canvas = document.getElementById(sCanvasId);
-
-		if(!canvas)
+		if(!_aCanvas[sCanvasId])
 		{
-			var canvas = document.createElement("canvas");
-			canvas.id = sCanvasId;
+			var canvas = document.getElementById(sCanvasId);
+
+			if(!canvas)
+			{
+				var canvas = document.createElement("canvas");
+				canvas.id = sCanvasId;
+			}
+
+			_aCanvas[sCanvasId] = {canvas: canvas, context: canvas.getContext("2d")};
 		}
 
-		this._aCanvas[sCanvasId] = {canvas: canvas, context: canvas.getContext("2d")};
-	}
+		return _aCanvas[sCanvasId];
+	};
 
-	return this._aCanvas[sCanvasId];
-};
+	/**
+	 * @param {string} sCanvasId
+	 * @return context
+	 */
+	this.getContext = function(sCanvasId)
+	{
+		return _get(sCanvasId).context;
+	};
+
+	/**
+	 * @param {string} sCanvasId
+	 * @return {HTMLCanvasElement}
+	 */
+	this.getCanvas = function(sCanvasId)
+	{
+		return _get(sCanvasId).canvas;
+	};
+}();

@@ -3,7 +3,6 @@ Jnt.Entity = Class.extend({
 
 	init: function()
 	{
-		console.log('Entity construct');
 		Jnt.Scene._activeScene._aEntity.push(this);
 
 		this.onInit();

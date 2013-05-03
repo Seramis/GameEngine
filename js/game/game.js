@@ -1,9 +1,11 @@
 Game = Jnt.Game.extend({
 	onInit: function()
 	{
-		console.log('Game Init');
-
 		sc_Menu.setActive();
+	},
+
+	onUpdate: function()
+	{
 	},
 
 	onDraw: function()

@@ -20,16 +20,17 @@ Jnt.Game = Class.extend({
 		var delta = (Date.now() - this._lastTickTime) / 1000;
 		this._lastTickTime = Date.now();
 
+		Jnt.Input.update();
+
 		if(!this._isPaused)
 		{
 			//Update
 			this.onUpdate(delta);
-
-			Jnt.Scene._activeScene ? Jnt.Scene._activeScene._onUpdate(delta) : null;
+			Jnt.Scene._activeScene && Jnt.Scene._activeScene._onUpdate(delta);
 
 			//Draw
 			this.onDraw(delta);
-			Jnt.Scene._activeScene ? Jnt.Scene._activeScene._onDraw(delta) : null;
+			Jnt.Scene._activeScene && Jnt.Scene._activeScene._onDraw(delta);
 		}
 
 		var that = this;

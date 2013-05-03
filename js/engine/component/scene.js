@@ -40,8 +40,6 @@ Jnt.Scene.prototype.setActive = function()
 {
 	Jnt.Scene._activeScene = this;
 
-	console.log('Active scene set!');
-
 	if(!this._bInit)
 	{
 		this._onInit();

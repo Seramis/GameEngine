@@ -5,8 +5,6 @@ var obj_Char = Jnt.Entity.extend({
 
 	onInit: function()
 	{
-		console.log('obj_Char onInit');
-
 		this.Sprite = new Jnt.Sprite('char');
 	},
 
