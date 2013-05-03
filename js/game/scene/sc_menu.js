@@ -7,7 +7,7 @@ sc_Menu.onInit = function()
 	this.obj_char2 = new obj_Char();
 
 	this.obj_char2.x += 100;
-	this.obj_char2.speed += 10;
+	this.obj_char2.speed = 120;
 };
 
 sc_Menu.onUpdate = function()

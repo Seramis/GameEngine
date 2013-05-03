@@ -2,6 +2,9 @@ Game = Jnt.Game.extend({
 	onInit: function()
 	{
 		sc_Menu.setActive();
+
+		this.tm = new Jnt.Tilemap('desert');
+		console.log(this.tm);
 	},
 
 	onUpdate: function()
@@ -15,6 +18,8 @@ Game = Jnt.Game.extend({
 		var canvas = Jnt.Canvas.getCanvas('canvas');
 
 		ctx.clearRect(0, 0, canvas.getAttribute('width'), canvas.getAttribute('height'));
+
+		this.tm.draw('canvas', 0, 0);
 	}
 });
 
