@@ -96,18 +96,17 @@ Jnt.Tilemap.prototype._getTileData = function(iTileId)
 	{
 		return false;
 	}
+
 	var ts;
 
 	for(var i in this.aTileset)
 	{
-		if(i <= iTileId)
-		{
-			ts = this.aTileset[i];
-		}
-		else
+		if(i > iTileId)
 		{
 			break;
 		}
+
+		ts = this.aTileset[i];
 	}
 
 	if(!ts)
