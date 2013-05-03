@@ -4,6 +4,7 @@ Jnt.Sprite = function(sSpriteName)
 	this._bLoaded = false;
 	this._curAnimation = undefined;
 	this._imgSpriteImage = undefined;
+	this.bRun = false;
 
 	var that = this;
 	Jnt.Asset.get('js/game/sprite/' + sSpriteName + '.json', function(data){
@@ -82,7 +83,7 @@ Jnt.Sprite.prototype.getImageOffsetByIndex = function(index)
 
 Jnt.Sprite.prototype.animate = function(modifier)
 {
-	if(!this._bLoaded)
+	if(!this._bLoaded || !this.bRun)
 	{
 		return false;
 	}

@@ -156,13 +156,11 @@ Jnt.Input = new function()
 
 	var _onKeyDown = function(event)
 	{
-		console.log('key down');
 		_aKeyBuffer[event.keyCode] = true;
 	};
 
 	var _onKeyUp = function(event)
 	{
-		console.log('key up');
 		_aKeyBuffer[event.keyCode] = false;
 	};
 

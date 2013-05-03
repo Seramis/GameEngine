@@ -10,25 +10,35 @@ var obj_Char = Jnt.Entity.extend({
 
 	onUpdate: function(modifier)
 	{
+		this.Sprite.bRun = false;
+
 		var stepSpeed = this.speed * modifier;
 
 		if(Jnt.Input.isKeyDown(Jnt.Input.keys.ArrowDown))
 		{
+			this.Sprite.setAnimation('walk_down');
+			this.Sprite.bRun = true;
 			this.y += stepSpeed;
 		}
 
 		if(Jnt.Input.isKeyDown(Jnt.Input.keys.ArrowUp))
 		{
+			this.Sprite.setAnimation('walk_up');
+			this.Sprite.bRun = true;
 			this.y -= stepSpeed;
 		}
 
 		if(Jnt.Input.isKeyDown(Jnt.Input.keys.ArrowRight))
 		{
+			this.Sprite.setAnimation('walk_right');
+			this.Sprite.bRun = true;
 			this.x += stepSpeed;
 		}
 
 		if(Jnt.Input.isKeyDown(Jnt.Input.keys.ArrowLeft))
 		{
+			this.Sprite.setAnimation('walk_left');
+			this.Sprite.bRun = true;
 			this.x -= stepSpeed;
 		}
 	},
