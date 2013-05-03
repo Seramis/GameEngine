@@ -2,29 +2,30 @@ Jnt.Canvas = {
 	_aCanvas: {}
 };
 
-Jnt.Canvas.getContext = function(canvas_id)
+Jnt.Canvas.getContext = function(sCanvasId)
 {
-	return this.get(canvas_id).getContext("2d");
+	return this._get(sCanvasId).context;
 };
 
-Jnt.Canvas.get = function(canvas_id)
+Jnt.Canvas.getCanvas = function(sCanvasId)
 {
-	if(!this._aCanvas[canvas_id])
-	{
-		var el = document.getElementById(canvas_id);
+	return this._get(sCanvasId).canvas;
+};
 
-		if(el)
-		{
-			this._aCanvas[canvas_id] = el;
-		}
-		else
+Jnt.Canvas._get = function(sCanvasId)
+{
+	if(!this._aCanvas[sCanvasId])
+	{
+		var canvas = document.getElementById(sCanvasId);
+
+		if(!canvas)
 		{
 			var canvas = document.createElement("canvas");
-			canvas.id = canvas_id;
-
-			this._aCanvas[canvas_id] = canvas;
+			canvas.id = sCanvasId;
 		}
+
+		this._aCanvas[sCanvasId] = {canvas: canvas, context: canvas.getContext("2d")};
 	}
 
-	return this._aCanvas[canvas_id];
+	return this._aCanvas[sCanvasId];
 };
