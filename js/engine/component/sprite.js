@@ -104,7 +104,7 @@ Jnt.Sprite.prototype.animate = function(modifier)
 	return true;
 };
 
-Jnt.Sprite.prototype.draw = function(canvas_id, x, y, width, height)
+Jnt.Sprite.prototype.draw = function(canvas_id, x, y, width, height, zIndex)
 {
 	if(!this._bLoaded)
 	{
@@ -122,14 +122,8 @@ Jnt.Sprite.prototype.draw = function(canvas_id, x, y, width, height)
 		height = this.oData.size[1];
 	}
 
-	var ctx = Jnt.Canvas.getContext(canvas_id);
-
-	if(!ctx) //Context must be available
-	{
-		return false;
-	}
-
-	ctx.drawImage(
+	Jnt.Render.image(
+		canvas_id,
 		this._imgSpriteImage,
 		sourceOffset[0],
 		sourceOffset[1],
@@ -138,7 +132,8 @@ Jnt.Sprite.prototype.draw = function(canvas_id, x, y, width, height)
 		x,
 		y,
 		width,
-		height
+		height,
+		zIndex
 	);
 
 	return true;

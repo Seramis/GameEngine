@@ -11,7 +11,7 @@ Game = Jnt.Game.extend({
 	{
 	},
 
-	onDraw: function()
+	onDraw: function(delta)
 	{
 		var ctx = Jnt.Canvas.getContext('canvas');
 
@@ -20,6 +20,8 @@ Game = Jnt.Game.extend({
 		ctx.clearRect(0, 0, canvas.getAttribute('width'), canvas.getAttribute('height'));
 
 		this.tm.draw('canvas', 0, 0);
+
+		ctx.fillText("FPS: " + (1000 / delta), 10, 10);
 	}
 });
 

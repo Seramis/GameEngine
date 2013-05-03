@@ -31,6 +31,7 @@ Jnt.Game = Class.extend({
 			//Draw
 			this.onDraw(delta);
 			Jnt.Scene._activeScene && Jnt.Scene._activeScene._onDraw(delta);
+			Jnt.Render.render();
 		}
 
 		var that = this;
