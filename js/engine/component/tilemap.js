@@ -59,6 +59,8 @@ Jnt.Tilemap.prototype._drawLayer = function(sCanvasId, oLayerData, x, y)
 		return false;
 	}
 
+	var ctx = Jnt.Canvas.getContext(sCanvasId);
+
 	for(var i = 0, l=oLayerData.data.length; i<l; i++)
 	{
 		var tileData = this._getTileData(oLayerData.data[i]);
@@ -69,23 +71,40 @@ Jnt.Tilemap.prototype._drawLayer = function(sCanvasId, oLayerData, x, y)
 		}
 
 		var tilePos = {
-			x: i % this.size.width,
-			y: (i / this.size.width) | 0
+			x: (i % this.size.width) * this.tileSize.width + x,
+			y: ((i / this.size.width) | 0) * this.tileSize.height + y
 		};
 
-		Jnt.Render.image(
-			sCanvasId,
-			tileData.img,
-			tileData.x,
-			tileData.y,
-			tileData.width,
-			tileData.height,
-			tilePos.x * this.tileSize.width,
-			tilePos.y * this.tileSize.height,
-			this.tileSize.width,
-			this.tileSize.height
-		);
+		this._drawTile(ctx, {
+			img: tileData.img,
+			sx: tileData.x,
+			sy: tileData.y,
+			sw: tileData.width,
+			sh: tileData.height,
+			x: tilePos.x,
+			y: tilePos.y,
+			w: this.tileSize.width,
+			h: this.tileSize.height
+		});
 	}
+};
+
+Jnt.Tilemap.prototype._drawTile = function(ctx, oTileData)
+{
+	Jnt.Render.draw(function()
+	{
+		ctx.drawImage(
+			oTileData.img,
+			oTileData.sx,
+			oTileData.sy,
+			oTileData.sw,
+			oTileData.sh,
+			oTileData.x,
+			oTileData.y,
+			oTileData.w,
+			oTileData.h
+		);
+	});
 };
 
 Jnt.Tilemap.prototype._getTileData = function(iTileId)

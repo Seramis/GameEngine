@@ -122,19 +122,23 @@ Jnt.Sprite.prototype.draw = function(canvas_id, x, y, width, height, zIndex)
 		height = this.oData.size[1];
 	}
 
-	Jnt.Render.image(
-		canvas_id,
-		this._imgSpriteImage,
-		sourceOffset[0],
-		sourceOffset[1],
-		this.oData.size[0],
-		this.oData.size[1],
-		x,
-		y,
-		width,
-		height,
-		zIndex
-	);
+	var ctx = Jnt.Canvas.getContext(canvas_id);
+
+	var that = this;
+
+	Jnt.Render.draw(function(){
+		ctx.drawImage(
+			that._imgSpriteImage,
+			sourceOffset[0],
+			sourceOffset[1],
+			that.oData.size[0],
+			that.oData.size[1],
+			x,
+			y,
+			width,
+			height
+		);
+	}, zIndex);
 
 	return true;
 };
