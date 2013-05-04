@@ -39,4 +39,14 @@ Jnt.Canvas = new function()
 	{
 		return _get(sCanvasId).canvas;
 	};
+
+	this.getSize = function(sCanvasId)
+	{
+		var canvas = _get(sCanvasId).canvas;
+
+		return {
+			width: canvas.getAttribute('width'),
+			height: canvas.getAttribute('height')
+		};
+	};
 }();

@@ -60,6 +60,7 @@ Jnt.Tilemap.prototype._drawLayer = function(sCanvasId, oLayerData, x, y)
 	}
 
 	var ctx = Jnt.Canvas.getContext(sCanvasId);
+	var canvasSize = Jnt.Canvas.getSize(sCanvasId);
 
 	for(var i = 0, l=oLayerData.data.length; i<l; i++)
 	{
@@ -74,6 +75,11 @@ Jnt.Tilemap.prototype._drawLayer = function(sCanvasId, oLayerData, x, y)
 			x: (i % this.size.width) * this.tileSize.width + x,
 			y: ((i / this.size.width) | 0) * this.tileSize.height + y
 		};
+
+		if(tilePos.x > canvasSize.width || tilePos.y > canvasSize.height)
+		{
+			continue;
+		}
 
 		this._drawTile(ctx, {
 			img: tileData.img,

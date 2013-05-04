@@ -24,15 +24,9 @@ Jnt.Scene.prototype.onDraw = function(){};
 Jnt.Scene.prototype._onDraw = function(modifier){
 	this.onDraw(modifier);
 
-	var aZiEntity = this._aEntity.slice();
-
-	aZiEntity.sort(function(e1, e2){
-		return e1.zIndex - e2.zIndex;
-	});
-
-	for(var i in aZiEntity)
+	for(var i in this._aEntity)
 	{
-		aZiEntity[i].onDraw(modifier);
+		this._aEntity[i].onDraw(modifier);
 	}
 };
 

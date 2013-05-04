@@ -1,4 +1,4 @@
-var obj_Char = Jnt.Entity.extend({
+var ent_Char = Jnt.Entity.extend({
 	x: 0,
 	y: 0,
 	speed: 60,

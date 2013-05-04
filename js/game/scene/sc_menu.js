@@ -2,16 +2,16 @@ sc_Menu = new Jnt.Scene();
 
 sc_Menu.onInit = function()
 {
-	this.obj_char = new obj_Char();
+	this.ent_char = new ent_Char();
 
-	this.obj_char2 = new obj_Char();
+	this.ent_char2 = new ent_Char();
 
-	this.obj_char2.x += 100;
-	this.obj_char2.speed = 120;
+	this.ent_char2.x += 100;
+	this.ent_char2.speed = 120;
 };
 
 sc_Menu.onUpdate = function()
 {};
 
-sc_Menu.onDraw = function()
+sc_Menu.onDraw = function(modifier)
 {};
