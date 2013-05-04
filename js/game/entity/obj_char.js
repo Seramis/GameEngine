@@ -47,6 +47,7 @@ var obj_Char = Jnt.Entity.extend({
 	{
 		this.Sprite.animate(modifier);
 
-		this.Sprite.draw('canvas', this.x, this.y, undefined, undefined, this.y);
+		this.Sprite.zIndex = this.y;
+		this.Sprite.draw('canvas', this.x, this.y);
 	}
 });

@@ -5,6 +5,7 @@ Jnt.Sprite = function(sSpriteName)
 	this._curAnimation = undefined;
 	this._imgSpriteImage = undefined;
 	this.bRun = false;
+	this.zIndex = 0;
 
 	var that = this;
 	Jnt.Asset.get('js/game/sprite/' + sSpriteName + '.json', function(data){
@@ -104,7 +105,7 @@ Jnt.Sprite.prototype.animate = function(modifier)
 	return true;
 };
 
-Jnt.Sprite.prototype.draw = function(canvas_id, x, y, width, height, zIndex)
+Jnt.Sprite.prototype.draw = function(canvas_id, x, y, width, height)
 {
 	if(!this._bLoaded)
 	{
@@ -138,7 +139,7 @@ Jnt.Sprite.prototype.draw = function(canvas_id, x, y, width, height, zIndex)
 			width,
 			height
 		);
-	}, zIndex);
+	}, this.zIndex);
 
 	return true;
 };
