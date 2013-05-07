@@ -1,15 +1,15 @@
 <?php
 
 $aScriptPaths = array(
-	'js/engine/util.js',
-	'js/engine/core.js',
-	'js/engine/asset.js',
-	'js/engine/event.js',
-	'js/engine/component/*.js',
+	'engine/util.js',
+	'engine/core.js',
+	'engine/asset.js',
+	'engine/event.js',
+	'engine/component/*.js',
 
-	'js/game/entity/*.js',
-	'js/game/scene/*.js',
-	'js/game/game.js',
+	'game/entity/*.js',
+	'game/scene/*.js',
+	'game/game.js',
 );
 
 header('Content-type: text/javascript');

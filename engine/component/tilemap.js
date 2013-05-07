@@ -8,7 +8,7 @@ Jnt.Tilemap = function(sTilemapName)
 	this.size = {width: 0, height: 0};
 
 	var that = this;
-	Jnt.Asset.get('js/game/tilemap/' + sTilemapName + '.json', function(data)
+	Jnt.Asset.get('game/tilemap/' + sTilemapName + '.json', function(data)
 	{
 		that.tileSize = {width: data.tilewidth, height: data.tileheight};
 		that.size = {width: data.width, height: data.height};
@@ -31,7 +31,7 @@ Jnt.Tilemap = function(sTilemapName)
 			};
 			that.aTileset[tileset.firstgid] = ts;
 
-			Jnt.Asset.get('img/tilemap/' + tileset.image, function(img){
+			Jnt.Asset.get('game/image/' + tileset.image, function(img){
 				ts.img = img;
 				that._bLoaded = true;
 			});

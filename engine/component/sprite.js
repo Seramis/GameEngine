@@ -8,7 +8,7 @@ Jnt.Sprite = function(sSpriteName)
 	this.zIndex = 0;
 
 	var that = this;
-	Jnt.Asset.get('js/game/sprite/' + sSpriteName + '.json', function(data){
+	Jnt.Asset.get('game/sprite/' + sSpriteName + '.json', function(data){
 		that.oData = data;
 
 		if(!that._curAnimation)
@@ -16,7 +16,7 @@ Jnt.Sprite = function(sSpriteName)
 			that._curAnimation = Object.keys(that.oData.animation)[0];
 		}
 
-		Jnt.Asset.get(that.oData.image, function(image)
+		Jnt.Asset.get('game/image/' + that.oData.image, function(image)
 		{
 			that._imgSpriteImage = image;
 

@@ -1,5 +1,5 @@
 {
-	"image": "img/chr.png",
+	"image": "sprite/chr.png",
 	"size": [32, 32],
 	"animationSpeed": 6,
 	"animation": {
