@@ -1,45 +1,53 @@
-Jnt.Game = Class.extend({
-	init: function()
+Jnt.Game = function(){};
+
+Jnt.Game.prototype.pause = function(setPaused)
+{
+	this._isPaused = setPaused ? true : false;
+};
+
+Jnt.Game.prototype._onAnimFrame = function()
+{
+	var delta = (Date.now() - this._lastTickTime) / 1000;
+	this._lastTickTime = Date.now();
+
+	Jnt.Input.update();
+
+	if(!this._isPaused)
 	{
-		this._isPaused = false;
+		//Update
+		this._onUpdate(delta);
+		Jnt.Scene._activeScene && Jnt.Scene._activeScene._onUpdate(delta);
 
-		this._lastTickTime = Date.now();
+		//Draw
+		this._onDraw(delta);
+		Jnt.Scene._activeScene && Jnt.Scene._activeScene._onDraw(delta);
+		Jnt.Render.render();
+	}
 
-		this.onInit();
+	var that = this;
 
-		this.onAnimFrame();
-	},
+	requestAnimFrame(function(){ that._onAnimFrame.call(that); });
+};
 
-	pause: function(setPaused)
-	{
-		this._isPaused = setPaused ? true : false;
-	},
+Jnt.Game.prototype.onInit = function(){};
+Jnt.Game.prototype.start = function()
+{
+	this._isPaused = false;
 
-	onAnimFrame: function()
-	{
-		var delta = (Date.now() - this._lastTickTime) / 1000;
-		this._lastTickTime = Date.now();
+	this._lastTickTime = Date.now();
 
-		Jnt.Input.update();
+	this.onInit();
 
-		if(!this._isPaused)
-		{
-			//Update
-			this.onUpdate(delta);
-			Jnt.Scene._activeScene && Jnt.Scene._activeScene._onUpdate(delta);
+	this._onAnimFrame();
+};
 
-			//Draw
-			this.onDraw(delta);
-			Jnt.Scene._activeScene && Jnt.Scene._activeScene._onDraw(delta);
-			Jnt.Render.render();
-		}
+Jnt.Game.prototype.onUpdate = function(modifier){};
+Jnt.Game.prototype._onUpdate = function(modifier){
+	this.onUpdate(modifier);
+};
 
-		var that = this;
-
-		requestAnimFrame(function(){ that.onAnimFrame.call(that); });
-	},
-
-	onUpdate: function(){},
-
-	onDraw: function(){}
-});
+Jnt.Game.prototype.onDraw = function(modifier){};
+Jnt.Game.prototype._onDraw = function(modifier)
+{
+	this.onDraw(modifier);
+};

@@ -13,7 +13,7 @@ There's 1 Game, that drives many Scenes (1 active at one time) that drives conta
 
 Each entity can do whatever they want. For example load a Sprite into it and drive it.
 
-Sprite is json, Entity is extended from Jnt.Entity, Scene is object and Game is also extended from Jnt.Game. (Maybe game should be like Scene...)
+Sprite is json, Entity is extended from Jnt.Entity, Scene and Game are objects from Jnt.Scene and Jnt.Game respectively.
 
 Game, Scene, Entity all have onUpdate() and onDraw() methods, which both are provided with delta. (a multiplier that can be used for movements for ex.)
 
