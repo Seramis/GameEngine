@@ -7,6 +7,8 @@ Jnt.Tilemap = function(sTilemapName)
 	this.tileSize = {width: 0, height: 0};
 	this.size = {width: 0, height: 0};
 
+	this.oTileDataCache = {};
+
 	var that = this;
 	Jnt.Asset.get('game/tilemap/' + sTilemapName + '.json', function(data)
 	{
@@ -59,6 +61,11 @@ Jnt.Tilemap.prototype._drawLayer = function(sCanvasId, oLayerData, x, y)
 		return false;
 	}
 
+	if(oLayerData.visible != true)
+	{
+		return false;
+	}
+
 	var ctx = Jnt.Canvas.getContext(sCanvasId);
 	var canvasSize = Jnt.Canvas.getSize(sCanvasId);
 
@@ -72,8 +79,8 @@ Jnt.Tilemap.prototype._drawLayer = function(sCanvasId, oLayerData, x, y)
 		}
 
 		var tilePos = {
-			x: (i % this.size.width) * this.tileSize.width + x,
-			y: ((i / this.size.width) | 0) * this.tileSize.height + y
+			x: (i % oLayerData.width + oLayerData.x) * this.tileSize.width + x,
+			y: ((i / oLayerData.width + oLayerData.y) | 0) * this.tileSize.height + y
 		};
 
 		if(tilePos.x > canvasSize.width || tilePos.y > canvasSize.height)
@@ -120,36 +127,41 @@ Jnt.Tilemap.prototype._getTileData = function(iTileId)
 		return false;
 	}
 
-	var ts;
-
-	for(var i in this.aTileset)
+	if(!this.oTileDataCache[iTileId])
 	{
-		if(i > iTileId)
+		var ts;
+
+		for(var i in this.aTileset)
 		{
-			break;
+			if(i > iTileId)
+			{
+				break;
+			}
+
+			ts = this.aTileset[i];
 		}
 
-		ts = this.aTileset[i];
+		if(!ts)
+		{
+			return false;
+		}
+
+		var iTileIndex = iTileId - ts.firstgid;
+
+		var pos = {
+			x: iTileIndex % ts.tilecount.x,
+			y: (iTileIndex / ts.tilecount.x) | 0
+		};
+
+		this.oTileDataCache[iTileId] = {
+			img: ts.img,
+			x: pos.x * (ts.tilewidth + ts.spacing) + ts.margin,
+			y: pos.y * (ts.tileheight + ts.spacing) + ts.margin,
+			width: ts.tilewidth,
+			height: ts.tileheight
+		};
 	}
 
-	if(!ts)
-	{
-		return false;
-	}
-
-	var iTileIndex = iTileId - ts.firstgid;
-
-	var pos = {
-		x: iTileIndex % ts.tilecount.x,
-		y: (iTileIndex / ts.tilecount.x) | 0
-	};
-
-	return {
-		img: ts.img,
-		x: pos.x * (ts.tilewidth + ts.spacing) + ts.margin,
-		y: pos.y * (ts.tileheight + ts.spacing) + ts.margin,
-		width: ts.tilewidth,
-		height: ts.tileheight
-	};
+	return this.oTileDataCache[iTileId];
 
 };

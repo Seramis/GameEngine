@@ -17,6 +17,11 @@ Sprite is json, Entity is extended from Jnt.Entity, Scene and Game are objects f
 
 Game, Scene, Entity all have onUpdate() and onDraw() methods, which both are provided with delta. (a multiplier that can be used for movements for ex.)
 
+Other features
+==============
+
+It currently has a support to Tiled tile editor maps support. It is able to render all tilelayer layers. Other layer types support is yet to be introduced.
+
 Running
 =======
 
