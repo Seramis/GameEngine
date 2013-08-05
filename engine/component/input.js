@@ -112,7 +112,10 @@ Jnt.Input = new function()
 	var _aKeyDownNow = [];
 	var _aKeyDownLast = [];
 
-	var _aMouseDown = [];
+	var _aMouseBuffer = [];
+	var _aMouseDownNow = [];
+	var _aMouseDownLast = [];
+
 	var _oMousePos = {x: 0, y:0};
 
 	this.isKeyDown = function(iKeyCode)
@@ -138,7 +141,23 @@ Jnt.Input = new function()
 
 	this.isMouseDown = function(iButtonId)
 	{
-		return _aMouseDown[iButtonId] === true;
+		return _aMouseBuffer[iButtonId] === true;
+	};
+
+	this.isMousePressed = function(iButtonId)
+	{
+		return (
+			_aMouseDownLast[iButtonId] !== true
+			&& _aMouseDownNow[iButtonId] === true
+			);
+	};
+
+	this.isMouseReleased = function(iButtonId)
+	{
+		return (
+			_aMouseDownLast[iButtonId] === true
+			&& _aMouseDownNow[iButtonId] !== true
+			);
 	};
 
 	this.getMouseXY = function()
@@ -150,6 +169,9 @@ Jnt.Input = new function()
 	{
 		_aKeyDownLast = _aKeyDownNow.slice(0);
 		_aKeyDownNow = _aKeyBuffer.slice(0);
+
+		_aMouseDownLast = _aMouseDownNow.slice(0);
+		_aMouseDownNow = _aMouseBuffer.slice(0);
 	};
 
 	//Events
@@ -169,12 +191,12 @@ Jnt.Input = new function()
 
 	var _onMouseDown = function(event)
 	{
-		_aMouseDown[event.button] = true;
+		_aMouseBuffer[event.button] = true;
 	};
 
 	var _onMouseUp = function(event)
 	{
-		_aMouseDown[event.button] = false;
+		_aMouseBuffer[event.button] = false;
 	};
 
 	var _onMouseMove = function(event)
